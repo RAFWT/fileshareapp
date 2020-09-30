@@ -1,0 +1,148 @@
+create account
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ If String.IsNullOrEmpty(TextBox1.Text) Or
+            String.IsNullOrEmpty(TextBox2.Text) Then
+            MsgBox("Please Fill All The Neccessary Field")
+        ElseIf String.Equals(My.Settings.UserID, TextBox1.Text) Or
+            String.Equals(My.Settings.user1, TextBox1.Text) Or
+            String.Equals(My.Settings.user2, TextBox1.Text) Then
+            MsgBox("Account Already Exist!!! Please Choose Different UserID")
+        Else
+            My.Settings.user2 = TextBox1.Text
+            My.Settings.pass2 = TextBox2.Text
+            My.Settings.Save()
+            MsgBox("Account Created Successfully")
+            Log_In.Show()
+            Me.Close()
+            My.Settings.Save()
+        End If
+
+
+login
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  If String.Equals(My.Settings.UserID, TextBox1.Text) And
+            String.Equals(My.Settings.Password, TextBox2.Text) Or
+            String.Equals(My.Settings.user1, TextBox1.Text) And
+            String.Equals(My.Settings.pass1, TextBox2.Text) Or
+            String.Equals(My.Settings.user2, TextBox1.Text) And
+            String.Equals(My.Settings.pass2, TextBox2.Text) Then
+            User_Profile.TextBox1.Text = TextBox1.Text
+            User_Profile.Show()
+            Me.Close()
+        Else
+            MsgBox("Inccorrect UserID Or Password")
+        End If
+
+reset password
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ If String.Equals(TextBox1.Text, TextBox2.Text) Then
+            My.Settings.Password = TextBox1.Text
+            My.Settings.Save()
+            MsgBox("Password Change")
+            Log_In.Show()
+            Me.Hide()
+        Else
+            MsgBox("Password Don't Match")
+        End If
+
+choose wat type of file
+oooooooooooooooooooooooooooooooooo
+If RadioButton1.Checked Then
+            Send_Text.TextBox2.Text = TextBox1.Text
+            Send_Text.Show()
+            Me.Close()
+        ElseIf RadioButton2.Checked Then
+            Send_Pic.TextBox1.Text = TextBox1.Text
+            Send_Pic.Show()
+            Me.Close()
+        Else
+            MsgBox("Please Select File Type")
+        End If
+
+
+
+send txt file
+============================ 
+If String.IsNullOrEmpty(TextBox1.Text) Then
+            MsgBox("Please Enter A Text")
+        ElseIf String.Equals(My.Settings.UserID, TextBox3.Text) Or
+            String.Equals(My.Settings.user1, TextBox3.Text) Or
+            String.Equals(My.Settings.user2, TextBox3.Text) Then
+            MsgBox("Send Successfull")
+            Txt_Received.TextBox1.Text = TextBox1.Text
+            My.Settings.sendid = TextBox3.Text
+            User_Profile.TextBox1.Text = TextBox2.Text
+            Txt_Received.TextBox3.Text = TextBox2.Text
+            Log_In.Show()
+            Me.Close()
+            Else
+            MsgBox("Opps!! The User Does Not Exist!!!! Please Enter Valid ID")
+        End If
+
+
+
+
+uplaod pic
+++++++++++++++++++++++++++++++++
+
+ Dim opf As New OpenFileDialog
+        opf.Filter = "Choose Image(*.jpg;*.png;*.gif)|*.jpg;*.png;*.gif"
+        If opf.ShowDialog = Windows.Forms.DialogResult.OK Then
+            PictureBox1.Image = Image.FromFile(opf.FileName)
+
+        End If
+
+send pic
+++++++++++++++++++++++++
+ If String.Equals(My.Settings.UserID, TextBox2.Text) Or
+            String.Equals(My.Settings.user1, TextBox2.Text) Or
+            String.Equals(My.Settings.user2, TextBox2.Text) Then
+            Pic_Received.PictureBox1.Image = PictureBox1.Image
+            MsgBox("Send Successfull")
+            My.Settings.sendpicid = TextBox2.Text
+            Pic_Received.TextBox2.Text = TextBox1.Text
+            Log_In.Show()
+            Me.Close()
+        Else
+            MsgBox("Opps!! The User Does Not Exist")
+        End If
+
+
+
+view received file
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ If RadioButton1.Checked And
+           My.Settings.sendid = TextBox1.Text Then
+            Txt_Received.TextBox2.Text = TextBox1.Text
+            Txt_Received.Show()
+            Me.Close()
+        ElseIf RadioButton2.Checked And
+               My.Settings.sendpicid = TextBox1.Text Then
+            Pic_Received.TextBox1.Text = TextBox1.Text
+            Pic_Received.Show()
+            Me.Close()
+        Else
+            MsgBox("No File Received")
+        End If
+
+
+
+save txt file
+======================
+ Dim isave As New SaveFileDialog
+        isave.Filter = "txt files (*.txt) |*.txt"
+        isave.FilterIndex = 2
+        isave.RestoreDirectory = False
+        If isave.ShowDialog() = DialogResult.OK Then
+            IO.File.WriteAllText(isave.FileName, TextBox1.Text)
+        End If
+
+
+save pic
+<<<<<<<<<<<<<<<<<<<<<<<<<
+ SaveFileDialog1.ShowDialog()
+        If SaveFileDialog1.FileName > "" Then
+            PictureBox1.Image.Save(SaveFileDialog1.FileName)
+        End If
+
+
